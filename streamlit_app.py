@@ -7,59 +7,75 @@ import pandas as pd
 import random
 from typing import List, Dict
 
-# 페이지 설정 - 넷플릭스 스타일 다크 테마
+# 페이지 설정 - 밝은 테마
 st.set_page_config(
-    page_title="넷플릭스 영화 추천",
+    page_title="영화 추천 시스템",
     page_icon="🎬",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# CSS 스타일링 - 넷플릭스 다크 테마
+# CSS 스타일링 - 밝은 테마 (흰색/회색 배경, 진한 글자)
 st.markdown("""
 <style>
-    /* 메인 배경색 - 넷플릭스 다크 */
+    /* 메인 배경색 - 흰색/회색 */
     .stApp {
-        background-color: #141414;
-        color: #ffffff;
+        background-color: #f5f5f5;
+        color: #1a1a1a;
     }
     
     /* 헤더 스타일 */
     h1 {
-        color: #E50914 !important;  /* 넷플릭스 레드 */
+        color: #3d2817 !important;  /* 진한 갈색 */
         font-weight: bold;
         text-align: center;
         padding: 20px 0;
     }
     
     h2 {
-        color: #ffffff !important;
+        color: #2c2c2c !important;  /* 진한 검정 */
         font-weight: bold;
         margin-top: 30px;
     }
     
     h3 {
-        color: #ffffff !important;
+        color: #2c2c2c !important;  /* 진한 검정 */
+    }
+    
+    h4 {
+        color: #3d2817 !important;  /* 진한 갈색 */
     }
     
     /* 카드 스타일 */
     .movie-card {
-        background-color: #1f1f1f;
+        background-color: #ffffff;
         border-radius: 8px;
         padding: 15px;
         margin: 10px;
         transition: transform 0.2s;
-        border: 1px solid #333;
+        border: 1px solid #d0d0d0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     
     .movie-card:hover {
         transform: scale(1.05);
-        border-color: #E50914;
+        border-color: #8b6f47;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    
+    .movie-card h4 {
+        color: #3d2817 !important;
+        margin-bottom: 10px;
+    }
+    
+    .movie-card p {
+        color: #2c2c2c !important;
+        margin: 5px 0;
     }
     
     /* 버튼 스타일 */
     .stButton > button {
-        background-color: #E50914;
+        background-color: #8b6f47;
         color: white;
         border-radius: 4px;
         border: none;
@@ -68,17 +84,36 @@ st.markdown("""
     }
     
     .stButton > button:hover {
-        background-color: #F40612;
+        background-color: #6b5637;
     }
     
     /* 사이드바 스타일 */
     .css-1d391kg {
-        background-color: #1a1a1a;
+        background-color: #ffffff;
     }
     
     /* 텍스트 색상 */
     .stMarkdown {
-        color: #ffffff;
+        color: #2c2c2c;
+    }
+    
+    /* 일반 텍스트 */
+    p {
+        color: #2c2c2c !important;
+    }
+    
+    /* 구분선 */
+    hr {
+        border-color: #d0d0d0;
+    }
+    
+    /* 메트릭 스타일 */
+    [data-testid="stMetricValue"] {
+        color: #3d2817 !important;
+    }
+    
+    [data-testid="stMetricLabel"] {
+        color: #2c2c2c !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -228,7 +263,7 @@ def display_movie_card(movie: Dict):
 def main():
     """메인 함수"""
     # 헤더
-    st.title("🎬 넷플릭스 영화 추천 시스템")
+    st.title("🎬 영화 추천 시스템")
     st.markdown("---")
     
     # 영화 데이터 로드
